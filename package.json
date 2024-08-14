@@ -21,7 +21,8 @@
     "husky": "^9.1.4",
     "jest": "^29.7.0",
     "lint-staged": "^15.2.9",
-    "prettier": "^3.3.3"
+    "prettier": "^3.3.3",
+    "vite": "^5.4.0"
   },
   "lint-staged": {
     "*.js": [
@@ -29,5 +30,8 @@
       "prettier --check",
       "jest --passWithNoTests"
     ]
+  },
+  "dependencies": {
+    "three": "^0.167.1"
   }
 }
