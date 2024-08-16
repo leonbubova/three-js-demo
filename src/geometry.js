@@ -1,8 +1,10 @@
 import * as THREE from 'three'
 
 export default class Geometry {
-  constructor({ scene }) {
+  constructor({ scene, size = 4, height = 1 }) {
     this.scene = scene
+    this.size = size
+    this.height = height
   }
 
   setup() {
@@ -10,12 +12,15 @@ export default class Geometry {
     this.material = new THREE.MeshLambertMaterial({ color: 'gray', wireframe: false })
     this.cubes = []
 
-    this.cubes.push(new THREE.Mesh(this.geometry, this.material))
-    this.cubes.push(new THREE.Mesh(this.geometry, this.material))
-    this.cubes.push(new THREE.Mesh(this.geometry, this.material))
-    this.scene.add(this.cubes[0], this.cubes[1], this.cubes[2])
-    this.cubes[0].position.set(0, 0.5, 0)
-    this.cubes[1].position.set(0, 0.5, 2)
-    this.cubes[2].position.set(0, 0.5, -2)
+    for (let x = 0; x < this.size; x++) {
+      for (let y = 0; y < this.height; y++) {
+        for (let z = 0; z < this.size; z++) {
+          const cube = new THREE.Mesh(this.geometry, this.material)
+          cube.position.set(x + 0.5, y + 0.5, z + 0.5)
+          this.scene.add(cube)
+          this.cubes.push(cube)
+        }
+      }
+    }
   }
 }

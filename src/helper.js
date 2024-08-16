@@ -6,10 +6,10 @@ export default class Helper {
   }
 
   setup() {
-    this.gridHelper = new THREE.GridHelper(10, 10)
+    this.gridHelper = new THREE.GridHelper(16, 16)
     this.scene.add(this.gridHelper)
 
-    this.axesHelper = new THREE.AxesHelper(5)
+    this.axesHelper = new THREE.AxesHelper(8)
     this.scene.add(this.axesHelper)
   }
 }
