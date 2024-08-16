@@ -1,24 +1,31 @@
 import * as THREE from 'three'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+import Lights from './lights'
+import Helper from './helper'
+import OrbitCamera from './camera'
+import Geometry from './geometry'
 
 const scene = new THREE.Scene()
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
+scene.background = new THREE.Color('#222222')
 
 const renderer = new THREE.WebGLRenderer()
 renderer.setSize(window.innerWidth, window.innerHeight)
-// eslint-disable-next-line
-renderer.setAnimationLoop(animate)
 document.body.appendChild(renderer.domElement)
 
-const geometry = new THREE.BoxGeometry(1, 1, 1)
-const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 })
-const cube = new THREE.Mesh(geometry, material)
-scene.add(cube)
+const lights = new Lights({ scene })
+lights.setup()
+const helper = new Helper({ scene })
+helper.setup()
+const geometry = new Geometry({ scene })
+geometry.setup()
 
-camera.position.z = 5
+const orbitCamera = new OrbitCamera({ scene })
+const controls = new OrbitControls(orbitCamera.camera, renderer.domElement)
 
 function animate() {
-  cube.rotation.x += 0.01
-  cube.rotation.y += 0.01
-
-  renderer.render(scene, camera)
+  requestAnimationFrame(animate)
+  renderer.render(scene, orbitCamera.camera)
+  controls.update()
 }
+
+animate()
