@@ -23,4 +23,13 @@ export default class Geometry {
       }
     }
   }
+
+  createCube() {
+    const cube = new THREE.Mesh(this.geometry, this.material)
+    return cube
+  }
+
+  addCube(cube) {
+    this.cubes.push(cube)
+  }
 }
